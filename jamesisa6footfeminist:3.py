@@ -1,6 +1,7 @@
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt 
+import sys
 
 
 #The menu() function generates the UI the accepts and validates user choice
@@ -22,7 +23,7 @@ def menu():
         print("")
 
 
-        menu_choice = input("Please enter the number of your choice (1-6): ")
+        menu_choice = input("Please enter the number of your choice (1-7): ")
 
         try:
             int(menu_choice)
@@ -53,7 +54,7 @@ def get_currency ():
 
     return currency
 
-def trends_meunu ():
+def trends_menu ():
     flag = True
 
     while flag:
@@ -78,12 +79,44 @@ def trends_meunu ():
                 print("Sorry, you did not neter a valid choice")
                 flag = True
             else:
-                return trend_choice  
+                return int(trend_choice)
 
 menu_choice = menu()
-currency = get_currency()
+
+def trend_GBP_to_USD(GBP_to_USD_df):
+    print(GBP_to_USD_df)
+
+    GBP_to_USD_df.plot()
+    plt.show
 
 
+if int(menu_choice) >= 1 and int(menu_choice) <7:
+    currency = get_currency()
+elif int(menu_choice) == 7:
+    trend_choice = trends_menu()
+
+    df = pd.read_csv("Task4a_data.csv",index_col=0,parse_dates=True)
+    # print(df)
+
+    if trend_choice == 1:
+        #trend over time GBP -> USD
+        
+        GBP_to_USD_df = df[["GBP - USD"]]
+        
+        trend_GBP_to_USD(GBP_to_USD_df)
+        
+
+    elif trend_choice == 2:
+        print("Option 2 selected")
+    elif trend_choice == 3:
+        print("Option 3 selected")
+    elif trend_choice == 4:
+        print("Option 4 selected")
+    elif trend_choice == 5:
+        print("Option 5 selected")
+
+    sys.exit()
+    
 #The get_conversion_rate function uses pandas to get the latest conversion rate
 #Imports a csv file in to a data frame
 #Uses 'iloc' to get the last/most recent value in the selected column
@@ -124,29 +157,3 @@ def perfom_conversion():
     print('You are converting {} in {}'.format(conversion_amount, currency[0:3]) )
     print('You will recieve {} in {}'.format(amount_recieved, currency[6:9]))
 perfom_conversion()
-
-
-
-# data = pd.read_csv('Task4a_data.csv')
-# df = pd.DataFrame(data)
-# df.plot('Date', 'Conversion')
-
-
-
-
-
-
-
-
-
-
-GBP_USD = pandas.read_csv(Task4a_data)
-
-
-sns.lineplot(
-    data=Task4a_data
-    
-
-
-
-)

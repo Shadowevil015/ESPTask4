@@ -1,6 +1,7 @@
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt 
+import matplotlib.ticker as ticker
 
 
 #The menu() function generates the UI the accepts and validates user choice
@@ -99,6 +100,7 @@ perfom_conversion()
 #The following code is used to plot the data in a scatter plot
 df = pd.read_csv("Task4a_data.csv")
 
-usd_to_gbp = df['USD - GBP']#.reset_index(drop=True)
-sns.lineplot(x='Date', y='USD - GBP', data=df)
+usd_to_gbp = df['USD - GBP']
+plot = sns.lineplot(x='Date', y='USD - GBP', data=df)
+plot.xaxis.set_major_locator(ticker.LinearLocator(numticks=7))
 plt.show()
